@@ -312,3 +312,15 @@ export function returnFloat(value) {
       return value;
   }
 }
+
+/*
+* 图片路径拼接
+* arr 数组
+* key 属性
+*/
+export function imgUrlJoin(arr, key){
+    arr.forEach((item, index, arr)=>{
+    item[key] = process.env.BASE_URL + item[key]
+  })
+  return arr
+}

@@ -11,8 +11,8 @@
       </slider>
       <slider ref="slider" :options="options" v-if="_tag == 'text'">
           <!-- 直接使用slideritem slot -->
-          <slideritem v-for="(item,index) in _datas" :key="index" :style="_style">
-                <p>{{item.Title}}</p>
+          <slideritem v-for="(item,index) in _datas" :key="index" :style="_itemStyle">
+                <p :style="_textStyle">{{item.articleTitle}}</p>
           </slideritem>
           <!-- 设置loading,可自定义 -->
           <div slot="loading">loading...</div>
@@ -28,7 +28,7 @@ export default {
       slider,
       slideritem
     },
-     props: ['_auto','_datas', '_tag' ,'_direction', '_style' , '_pagination']
+    props: ['_auto','_datas', '_tag' ,'_direction', '_style', '_itemStyle', '_textStyle', '_pagination']
         ,
     data () {
       return {

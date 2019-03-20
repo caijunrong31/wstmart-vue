@@ -2,6 +2,10 @@
     display: flex;
  }
 
+.fww{
+    flex-wrap: wrap
+}
+
 .jc {
     justify-content: center;
 }
