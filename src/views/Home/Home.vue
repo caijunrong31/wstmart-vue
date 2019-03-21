@@ -115,25 +115,29 @@ export default {
             this.$common.loading()
             getIndexData().then(res=>{
                 //   console.log(res)
-                const data = res.data
-                this.bannerData = imgUrlJoin(data.swiper, 'adFile')
-                this.navData = imgUrlJoin(data.btns, 'btnImg')
-                this.indexAds = imgUrlJoin(data.indexAds, 'adFile')
-                this.newsData = data.news
-                this.ads = imgUrlJoin(data.ads, 'adFile')[0]
-                this.ads1 = imgUrlJoin(data.ads1, 'adFile')[0]
-                this.ads2 = imgUrlJoin(data.ads2, 'adFile')[0]
-                this.ads3 = imgUrlJoin(data.ads3, 'adFile')[0]
-                this.$common.loading(false)
+                if(res.status!=-1){
+                    const data = res.data
+                    this.bannerData = imgUrlJoin(data.swiper, 'adFile')
+                    this.navData = imgUrlJoin(data.btns, 'btnImg')
+                    this.indexAds = imgUrlJoin(data.indexAds, 'adFile')
+                    this.newsData = data.news
+                    this.ads = imgUrlJoin(data.ads, 'adFile')[0]
+                    this.ads1 = imgUrlJoin(data.ads1, 'adFile')[0]
+                    this.ads2 = imgUrlJoin(data.ads2, 'adFile')[0]
+                    this.ads3 = imgUrlJoin(data.ads3, 'adFile')[0]
+                    this.$common.loading(false)
+                }
             })
             getFloorData(0).then(res=>{
-                console.log(res)
-                const data = res.data
-                this.catData.splice(0,this.catData.length)
-                this.catData.push(data)
-                this.catData[0].goods = imgUrlJoin(this.catData[0].goods, 'goodsImg')
-                this.floorIndex = 0;
-                this.allLoaded = false
+                // console.log(res)
+                if(res.status!=-1){
+                    const data = res.data
+                    this.catData.splice(0,this.catData.length)
+                    this.catData.push(data)
+                    this.catData[0].goods = imgUrlJoin(this.catData[0].goods, 'goodsImg')
+                    this.floorIndex = 0;
+                    this.allLoaded = false
+                }
             })
         },
         loadTop() {
@@ -160,6 +164,8 @@ export default {
         handleScroll () {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
             let offsetTop = document.querySelector('#app').offsetHeight;
+            console.log("scrollTop: ", scrollTop);
+            console.log("offsetTop: ", offsetTop);
             if (offsetTop-scrollTop<=612) this.loadBottom();
         }
     }
@@ -168,7 +174,7 @@ export default {
 
 <style lang="scss" scoped>
     #home{
-        margin-bottom: 55px;
+        margin-bottom: getAdaptSize(5.5rem);
         .loading-tip{
             height: getAdaptSize(4rem);
         }

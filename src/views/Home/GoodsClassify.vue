@@ -61,11 +61,6 @@ export default {
         }
     },
     methods:{
-        loadMore() {
-            console.log(222)
-            this.loading = true
-            this.$emit('loadBottom')
-        }
     }
 }
 </script>

@@ -45,6 +45,9 @@ export default {
         if (this.$route.path.length>0){
             const selected = this.$route.path.substring(1)
             switch (selected) {
+                case 'Classify':
+                    this.selected = '分类'
+                    break
                 case 'ShopCart':
                     this.selected = '购物车'
                     break
@@ -67,6 +70,7 @@ export default {
                     break
                 case '分类':
                     this.classifyIcon = Resource.classifyIconActive
+                    this.$router.push({path:'/Classify'})
                     break
                 case '购物车':
                     this.cartIcon = Resource.cartIconActive

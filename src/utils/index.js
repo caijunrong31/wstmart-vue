@@ -324,3 +324,21 @@ export function imgUrlJoin(arr, key){
   })
   return arr
 }
+
+/*
+* 从对象数组中获取指定属性值
+* attrs 属性数组
+* objArr 对象数组 
+*/
+export function getValsFromObjArr(attrs, objArr){
+  const vals = []
+  for(let i=0; i<objArr.length; i++){
+      let val = {}
+      attrs.forEach((item, index, arr)=>{
+        val[item] = objArr[i][item]
+      })
+      val.isActive = false;
+      vals.push(val)
+  }
+  return vals
+}

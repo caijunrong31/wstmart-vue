@@ -1,5 +1,5 @@
 <template>
-    <div class="slider-outsize" :style="_style">
+    <div class="slider-outsize" :style="_style" v-show="_isShow!=null?_isShow:true">
         <!-- 配置slider组件 -->
       <slider ref="slider" :options="options" v-if="_tag == 'img'">
           <!-- 直接使用slideritem slot -->
@@ -28,7 +28,7 @@ export default {
       slider,
       slideritem
     },
-    props: ['_auto','_datas', '_tag' ,'_direction', '_style', '_itemStyle', '_textStyle', '_pagination']
+    props: ['_auto','_datas', '_tag' ,'_direction', '_style', '_itemStyle', '_textStyle', '_pagination', '_isShow']
         ,
     data () {
       return {
