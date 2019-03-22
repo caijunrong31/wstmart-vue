@@ -34,8 +34,8 @@ export default {
         handleScroll(){
             let scrollTop = document.querySelector('#list-view').scrollTop
             let offsetTop = document.querySelector('#list-view').offsetHeight + this.offsetTop; 
-            console.log('scrollTop: ', scrollTop)
-            console.log('offsetTop: ', offsetTop)
+            // console.log('scrollTop: ', scrollTop)
+            // console.log('offsetTop: ', offsetTop)
             if (scrollTop-offsetTop>=241){
                 this.offsetTop += 266
                 this.loadBottom()

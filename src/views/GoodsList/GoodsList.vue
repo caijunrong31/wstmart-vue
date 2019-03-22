@@ -28,7 +28,7 @@
             </div>
             <ListView 
                 @loadMore="loadMore()"
-                :_isLoading="isLoading"
+                :_loading="loading"
                 :_allLoaded="allLoaded">
                 <Goods
                 :_datas="goodsData"></Goods>
@@ -54,7 +54,7 @@ export default {
     },
     data(){
         return {
-            isLoading:false,
+            loading:false,
             allLoaded:false,
             catId:-1,
             page:1,
@@ -105,12 +105,12 @@ export default {
             })
         },
         loadMore(){
-            this.isLoading = true
+            this.loading = true
             this.page++
             getGoodsList(this.catId, this.page).then(res=>{
                 console.log(res)
                 if(res.status!=-1){
-                    this.isLoading = false
+                    this.loading = false
                     let data = res.data
                     if(res.data.goodsPage.data.length==0) this.allLoaded = true
                     this.goodsData = this.goodsData.concat(imgUrlJoin(res.data.goodsPage.data, 'goodsImg'))
