@@ -1,64 +1,61 @@
 <template>
     <div id="home">
-        <header class="xn-box ac jsb">
-            <div class="classify xn-box center"><i></i></div>
-            <div class="search">按关键字搜索商品</div>
-            <div class="user">
-                <div class="login">登陆</div>
+        <SearchBox
+            _isReadOnly="true"
+            _isClassifyShow="true"
+            _isLoginShow="true"></SearchBox>
+        <mt-loadmore :top-method="loadTop" :bottom-all-loaded="allLoaded" ref="loadmore">
+            <Swiper 
+            :_auto="4000" 
+            :_tag="'img'"
+            :_datas="bannerData"></Swiper>
+            <nav class="xn-box">
+                <div class="nav-item xn-box column center" v-for="(item,index) in navData" :key="index">
+                    <img :src="item.btnImg" :alt="item.btnName">
+                    <span>{{item.btnName}}</span>
+                </div>
+            </nav>
+            <div class="ads">
+                <div class="ads-item" v-for="(item,index) in indexAds" :key="item.adId">
+                    <img :src="item.adFile" :alt="item.adId">
+                </div>
             </div>
-        </header>
-         <mt-loadmore :top-method="loadTop" :bottom-all-loaded="allLoaded" ref="loadmore">
-              <Swiper 
-                :_auto="4000" 
-                :_tag="'img'"
-                :_datas="bannerData"></Swiper>
-                <nav class="xn-box">
-                    <div class="nav-item xn-box column center" v-for="(item,index) in navData" :key="index">
-                        <img :src="item.btnImg" :alt="item.btnName">
-                        <span>{{item.btnName}}</span>
+            <div class="notice-box">
+                <div class="notice xn-box ac jsb">
+                    <div class="notice-label xn-box">
+                        <span>商城</span>
+                        <span class="middle">快讯</span>
+                        <span>:</span>
                     </div>
-                </nav>
-                <div class="ads">
-                    <div class="ads-item" v-for="(item,index) in indexAds" :key="item.adId">
-                        <img :src="item.adFile" :alt="item.adId">
-                    </div>
-                </div>
-                <div class="notice-box">
-                    <div class="notice xn-box ac jsb">
-                        <div class="notice-label xn-box">
-                           <span>商城</span>
-                           <span class="middle">快讯</span>
-                           <span>:</span>
-                        </div>
-                        <Swiper 
-                            :_auto="5000" 
-                            :_tag="'text'" 
-                            :_direction="'vertical'" 
-                            :_datas="newsData" 
-                            :_pagination="false" 
-                            :_style="'width:58%;height:3.25rem;justify-content:flex-start;overflow:hidden;'"
-                            :_itemStyle="'height:3.25rem;justify-content:flex-start;'"
-                            :_textStyle="'width:95.5%;color:#e50e0f;overflow:hidden;'"></Swiper>
-                        <div class="more xn-box center">
-                            更多
-                        </div>
+                    <Swiper 
+                        :_auto="5000" 
+                        :_tag="'text'" 
+                        :_direction="'vertical'" 
+                        :_datas="newsData" 
+                        :_pagination="false" 
+                        :_style="'width:58%;height:3.25rem;justify-content:flex-start;overflow:hidden;'"
+                        :_itemStyle="'height:3.25rem;justify-content:flex-start;'"
+                        :_textStyle="'width:95.5%;color:#e50e0f;overflow:hidden;'"></Swiper>
+                    <div class="more xn-box center">
+                        更多
                     </div>
                 </div>
-                <div class="adst clearfix">
-                    <div class="adstl pull-left">
-                        <img :src="ads.adFile">
-                    </div>
+            </div>
+            <div class="adst clearfix">
+                <div class="adstl pull-left">
+                    <img :src="ads.adFile">
+                </div>
+                <div class="adstr pull-left">
+                    <img :src="ads3.adFile">
+                </div>
                     <div class="adstr pull-left">
-                        <img :src="ads3.adFile">
-                    </div>
-                     <div class="adstr pull-left">
-                        <img :src="ads2.adFile">
-                    </div>
+                    <img :src="ads2.adFile">
                 </div>
-                <GoodsClassify
-                    :_datas="catData"
-                    ></GoodsClassify>
-         </mt-loadmore>
+            </div>
+            <GoodsClassify
+                :_datas="catData"
+                ></GoodsClassify>
+        </mt-loadmore>
         <p v-if="loading" class="loading-tip xn-box center">
             <mt-spinner color="rgba(255, 51, 153, 1)" type="fading-circle"></mt-spinner>
             <span style="margin-left: 8px;">更多加载中...</span>
@@ -72,6 +69,7 @@ import Vue from 'vue'
 import { Loadmore, Spinner } from 'mint-ui'
 import { imgUrlJoin } from '@/utils/index'
 import { getIndexData, getFloorData } from '@/api/home'
+import SearchBox from '@/components/SearchBox'
 import Swiper from '@/components/Swiper'
 import GoodsClassify from './GoodsClassify'
 
@@ -81,6 +79,7 @@ Vue.component(Spinner.name, Spinner)
 export default {
     name:'Home',
     components:{
+        SearchBox,
         Swiper,
         GoodsClassify
         },
@@ -164,8 +163,8 @@ export default {
         handleScroll () {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
             let offsetTop = document.querySelector('#app').offsetHeight;
-            console.log("scrollTop: ", scrollTop);
-            console.log("offsetTop: ", offsetTop);
+            // console.log("scrollTop: ", scrollTop);
+            // console.log("offsetTop: ", offsetTop);
             if (offsetTop-scrollTop<=612) this.loadBottom();
         }
     }
@@ -177,48 +176,6 @@ export default {
         margin-bottom: getAdaptSize(5.5rem);
         .loading-tip{
             height: getAdaptSize(4rem);
-        }
-    }
-    header{
-        width: 100%;
-        height: getAdaptSize(4rem);
-        background-color: #e50e0f;
-        .classify{
-            width: getAdaptSize(5rem);
-            height: getAdaptSize(3.3rem);
-            i{
-                display: block;
-                width: getAdaptSize(2rem);
-                height: getAdaptSize(2rem);
-                background: url(../../assets/img/classify.png);
-                background-size: 100%;
-            }
-        }
-        .search{
-            box-sizing: border-box;
-            padding-left: getAdaptSize(2.5rem);
-            width: 75%;
-            height: getAdaptSize(2.8rem);
-            line-height: getAdaptSize(2.9rem);
-            color: #666;
-            font-size: getAdaptSize(1.6rem);
-            background-color: #fff;
-            border-radius: 15px;
-            background-repeat: no-repeat; 
-            background-image: url(../../assets/img/search.png);
-            background-size: getAdaptSize(1.3rem) getAdaptSize(1.3rem);
-            background-position: 3% center;
-        }
-        .user{
-            .login{
-                width: getAdaptSize(5rem);
-                height: getAdaptSize(4rem);
-                line-height: getAdaptSize(4rem);
-                text-align: center;
-                font-weight: bold;
-                font-size: getAdaptSize(1.6rem);
-                color: #fff;
-            }
         }
     }
     nav{

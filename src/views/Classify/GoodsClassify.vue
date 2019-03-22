@@ -3,9 +3,7 @@
         <div class="classify-item" v-for="(itemOut,indexOut) in _datas" :key="itemOut.catId">
             <div class="classify-tit" @click="goToGoodsList(_catId)">{{itemOut.catName}}</div>
             <div class="goods xn-box fww">
-                <div 
-                    class="goods-item xn-box column center" 
-                    @click="goToGoodsList(item.catId)"
+                <div class="goods-item xn-box column center" 
                     v-for="(item,index) in itemOut.childList" 
                     :key="item.catId">
                     <div class="img">

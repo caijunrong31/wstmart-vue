@@ -5,7 +5,6 @@ import App from './App'
 import router from './router'
 import store from './store'
 import './styles/common.css'
-// import 'mint-ui/lib/font/style.css'
 import 'mint-ui/lib/style.min.css'
 import Common from './utils/common'
 

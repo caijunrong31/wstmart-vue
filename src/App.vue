@@ -75,6 +75,17 @@ html {
   /* margin-top: 60px; */
 }
 
+.mint-header{
+  height: getAdaptSize(4rem);
+  background-color: #d50b00;
+  .mintui{
+    font-size: 1.6rem;
+  }
+  .mint-header-title{
+    font-size: 1.4rem;
+  }
+}
+
 #productInfo{
   .mint-cell-wrapper {
       background-image: none;

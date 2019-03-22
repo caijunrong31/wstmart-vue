@@ -1,9 +1,9 @@
 <template>
-    <mt-header title="标题过长会隐藏后面的内容啊哈哈哈哈">
-		  <router-link to="/" slot="left">
-		    <mt-button icon="back">返回</mt-button>
+    <mt-header :title="_title">
+		  <router-link :to="_link" slot="left">
+		    <mt-button icon="back"></mt-button>
 		  </router-link>
-		  <mt-button icon="more" slot="right" ></mt-button>
+		  <!-- <mt-button icon="more" slot="right" ></mt-button> -->
 		</mt-header>
 </template>
 
@@ -13,11 +13,17 @@ import { Header, Button } from 'mint-ui'
 Vue.component(Header.name, Header)
 Vue.component(Button.name, Button)
 export default {    
-    name:'Header'
+		name:'Header',
+		props: ['_link', '_title'],
+		data(){
+			return {
+
+			}
+		}
 }
 </script>
 
 <style lang="scss" scoped>
-
+	
 </style>
 

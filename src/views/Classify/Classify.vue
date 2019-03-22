@@ -1,8 +1,12 @@
 <template>
   <div id="classify">
-    <header class="xn-box center">
+    <!-- <div class="search-box xn-box center">
         <div class="search">按关键字搜索商品</div>
-    </header>
+    </div> -->
+    <SearchBox
+      _isReadOnly="true"
+      _style="justify-content: center;"
+      _searchStyle="width: 80%;"></SearchBox>
     <div class="container xn-box jsb">
         <div class="sidebar">
           <ul>
@@ -34,11 +38,13 @@
 <script>
 import { imgUrlJoin, getValsFromObjArr } from '@/utils/index'
 import { getCatsData } from '@/api/classify'
+import SearchBox from '@/components/SearchBox'
 import Swiper from '@/components/Swiper'
 import GoodsClassify from './GoodsClassify'
 export default {
   name: 'Classify',
   components:{
+    SearchBox,
     Swiper,
     GoodsClassify
     },
@@ -87,7 +93,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang='scss' scoped>
-  header{
+  .search-box{
       margin-bottom: 2px;
       width: 100%;
       height: getAdaptSize(4rem);
